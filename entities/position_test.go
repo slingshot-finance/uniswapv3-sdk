@@ -5,10 +5,10 @@ import (
 	"testing"
 
 	"github.com/daoleno/uniswap-sdk-core/entities"
-	"github.com/daoleno/uniswapv3-sdk/constants"
-	"github.com/daoleno/uniswapv3-sdk/utils"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/shopspring/decimal"
+	"github.com/slingshot-finance/uniswapv3-sdk/constants"
+	"github.com/slingshot-finance/uniswapv3-sdk/utils"
 	"github.com/stretchr/testify/assert"
 )
 
