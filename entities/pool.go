@@ -260,7 +260,6 @@ func (p *Pool) swap(zeroForOne bool, amountSpecified, sqrtPriceLimitX96 *big.Int
 		// by simply traversing to the next available tick, we instead need to exactly replicate
 		// tickBitmap.nextInitializedTickWithinOneWord
 		step.tickNext, step.initialized = p.TickDataProvider.NextInitializedTickWithinOneWord(state.tick, zeroForOne, p.tickSpacing())
-
 		if step.tickNext < utils.MinTick {
 			step.tickNext = utils.MinTick
 		} else if step.tickNext > utils.MaxTick {
