@@ -251,8 +251,11 @@ func (p *Pool) swap(zeroForOne bool, amountSpecified, sqrtPriceLimitX96 *big.Int
 		liquidity:                p.Liquidity,
 	}
 
+	counter := 0
 	// start swap while loop
-	for state.amountSpecifiedRemaining.Cmp(constants.Zero) != 0 && state.sqrtPriceX96.Cmp(sqrtPriceLimitX96) != 0 {
+	// limit number of loops to 10,000 incase a new tickspacing is added which isnt specified
+	for counter < 10000 && state.amountSpecifiedRemaining.Cmp(constants.Zero) != 0 && state.sqrtPriceX96.Cmp(sqrtPriceLimitX96) != 0 {
+		counter++
 		var step StepComputations
 		step.sqrtPriceStartX96 = state.sqrtPriceX96
 
