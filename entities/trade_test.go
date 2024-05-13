@@ -23,60 +23,60 @@ var (
 		token1,
 		entities.FromRawAmount(token0, big.NewInt(100000)),
 		entities.FromRawAmount(token1, big.NewInt(100000)),
-		constants.FeeMedium,
+		uint64(constants.FeeMedium),
 	)
 	pool_0_2 = v2StylePool(
 		token0,
 		token2,
 		entities.FromRawAmount(token0, big.NewInt(100000)),
 		entities.FromRawAmount(token2, big.NewInt(110000)),
-		constants.FeeMedium,
+		uint64(constants.FeeMedium),
 	)
 	pool_0_3 = v2StylePool(
 		token0,
 		token3,
 		entities.FromRawAmount(token0, big.NewInt(100000)),
 		entities.FromRawAmount(token3, big.NewInt(90000)),
-		constants.FeeMedium,
+		uint64(constants.FeeMedium),
 	)
 	pool_1_2 = v2StylePool(
 		token1,
 		token2,
 		entities.FromRawAmount(token1, big.NewInt(120000)),
 		entities.FromRawAmount(token2, big.NewInt(100000)),
-		constants.FeeMedium,
+		uint64(constants.FeeMedium),
 	)
 	pool_1_3 = v2StylePool(
 		token1,
 		token3,
 		entities.FromRawAmount(token1, big.NewInt(120000)),
 		entities.FromRawAmount(token3, big.NewInt(130000)),
-		constants.FeeMedium,
+		uint64(constants.FeeMedium),
 	)
 	pool_weth_0 = v2StylePool(
 		entities.WETH9[1],
 		token0,
 		entities.FromRawAmount(entities.WETH9[1], big.NewInt(100000)),
 		entities.FromRawAmount(token0, big.NewInt(100000)),
-		constants.FeeMedium,
+		uint64(constants.FeeMedium),
 	)
 	pool_weth_1 = v2StylePool(
 		entities.WETH9[1],
 		token1,
 		entities.FromRawAmount(entities.WETH9[1], big.NewInt(100000)),
 		entities.FromRawAmount(token1, big.NewInt(100000)),
-		constants.FeeMedium,
+		uint64(constants.FeeMedium),
 	)
 	pool_weth_2 = v2StylePool(
 		entities.WETH9[1],
 		token2,
 		entities.FromRawAmount(entities.WETH9[1], big.NewInt(100000)),
 		entities.FromRawAmount(token2, big.NewInt(100000)),
-		constants.FeeMedium,
+		uint64(constants.FeeMedium),
 	)
 )
 
-func v2StylePool(token0, token1 *entities.Token, reserve0, reserve1 *entities.CurrencyAmount, feeAmount constants.FeeAmount) *Pool {
+func v2StylePool(token0, token1 *entities.Token, reserve0, reserve1 *entities.CurrencyAmount, feeAmount uint64) *Pool {
 	sqrtRatioX96 := utils.EncodeSqrtRatioX96(reserve1.Quotient(), reserve0.Quotient())
 	liquidity := new(big.Int).Sqrt(new(big.Int).Mul(reserve0.Quotient(), reserve1.Quotient()))
 	ticks := []Tick{

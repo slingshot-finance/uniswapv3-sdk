@@ -18,7 +18,7 @@ import (
  * @param fee The fee tier of the pool
  * @returns The pool address
  */
-func ComputePoolAddress(factoryAddress common.Address, tokenA *entities.Token, tokenB *entities.Token, fee constants.FeeAmount, initCodeHashManualOverride string) (common.Address, error) {
+func ComputePoolAddress(factoryAddress common.Address, tokenA *entities.Token, tokenB *entities.Token, fee uint64, initCodeHashManualOverride string) (common.Address, error) {
 	isSorted, err := tokenA.SortsBefore(tokenB)
 	if err != nil {
 		return common.Address{}, err
@@ -37,7 +37,7 @@ func ComputePoolAddress(factoryAddress common.Address, tokenA *entities.Token, t
 	return getCreate2Address(factoryAddress, token0.Address, token1.Address, fee, initCodeHashManualOverride), nil
 }
 
-func getCreate2Address(factoyAddress, addressA, addressB common.Address, fee constants.FeeAmount, initCodeHashManualOverride string) common.Address {
+func getCreate2Address(factoyAddress, addressA, addressB common.Address, fee uint64, initCodeHashManualOverride string) common.Address {
 	var salt [32]byte
 	copy(salt[:], crypto.Keccak256(abiEncode(addressA, addressB, fee)))
 
@@ -47,7 +47,7 @@ func getCreate2Address(factoyAddress, addressA, addressB common.Address, fee con
 	return crypto.CreateAddress2(factoyAddress, salt, common.FromHex(constants.PoolInitCodeHash))
 }
 
-func abiEncode(addressA, addressB common.Address, fee constants.FeeAmount) []byte {
+func abiEncode(addressA, addressB common.Address, fee uint64) []byte {
 	addressTy, _ := abi.NewType("address", "address", nil)
 	uint256Ty, _ := abi.NewType("uint256", "uint256", nil)
 

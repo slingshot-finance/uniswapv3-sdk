@@ -32,7 +32,7 @@ type StepComputations struct {
 type Pool struct {
 	Token0           *entities.Token
 	Token1           *entities.Token
-	Fee              constants.FeeAmount
+	Fee              uint64
 	SqrtRatioX96     *big.Int
 	Liquidity        *big.Int
 	TickCurrent      int
@@ -42,7 +42,7 @@ type Pool struct {
 	token1Price *entities.Price
 }
 
-func GetAddress(tokenA, tokenB *entities.Token, fee constants.FeeAmount, initCodeHashManualOverride string) (common.Address, error) {
+func GetAddress(tokenA, tokenB *entities.Token, fee uint64, initCodeHashManualOverride string) (common.Address, error) {
 	return utils.ComputePoolAddress(constants.FactoryAddress, tokenA, tokenB, fee, initCodeHashManualOverride)
 }
 
@@ -56,8 +56,8 @@ func GetAddress(tokenA, tokenB *entities.Token, fee constants.FeeAmount, initCod
  * @param tickCurrent The current tick of the pool
  * @param ticks The current state of the pool ticks or a data provider that can return tick data
  */
-func NewPool(tokenA, tokenB *entities.Token, fee constants.FeeAmount, sqrtRatioX96 *big.Int, liquidity *big.Int, tickCurrent int, ticks TickDataProvider) (*Pool, error) {
-	if fee >= constants.FeeMax {
+func NewPool(tokenA, tokenB *entities.Token, fee uint64, sqrtRatioX96 *big.Int, liquidity *big.Int, tickCurrent int, ticks TickDataProvider) (*Pool, error) {
+	if fee >= uint64(constants.FeeMax) {
 		return nil, ErrFeeTooHigh
 	}
 
